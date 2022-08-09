@@ -27,19 +27,6 @@ public class JmsConfig {
         return new JmsTemplate(connectionFactory());
     }
 
-//    @Bean(name = "myFactoryQueue")
-//    public JmsListenerContainerFactory<?> myFactoryQueue(
-//            ConnectionFactory connectionFactory,
-//            DefaultJmsListenerContainerFactoryConfigurer configurer
-//    ) {
-//        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-//        factory.setErrorHandler(t -> log.warn("An error has occurred in the transaction", t));
-//        factory.setMessageConverter(new MessagingMessageConverter());
-//        factory.setPubSubDomain(false);
-//        configurer.configure(factory, connectionFactory);
-//        return factory;
-//    }
-
     @Bean
     public JmsListenerContainerFactory<?> myFactory(
             ConnectionFactory connectionFactory,
