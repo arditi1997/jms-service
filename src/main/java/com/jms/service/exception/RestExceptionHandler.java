@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestControllerAdvice
 @Slf4j
 public class RestExceptionHandler {
@@ -22,6 +25,15 @@ public class RestExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponseDto handleRequestBodyNotValidException(MethodArgumentNotValidException e){
         log.warn(e.getMessage());
-        return new ErrorResponseDto(ErrorCode.BAD_REQUEST.getCode());
+
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto();
+        List<String> errors = new ArrayList<>();
+        e.getBindingResult().getAllErrors().forEach(objectError ->
+                    errors.add(objectError.getDefaultMessage()));
+        errorResponseDto.setErrorCode(ErrorCode.BAD_REQUEST.getCode());
+        errorResponseDto.setMessage(ErrorCode.BAD_REQUEST.getMessage());
+        errorResponseDto.setErrors(errors);
+
+        return errorResponseDto;
     }
 }

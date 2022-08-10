@@ -1,29 +1,31 @@
-package com.jms.service.model;
+package com.jms.model;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.UUID;
 
-@Entity
 public class Product implements Serializable {
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+
+    private String id;
+    @NotEmpty(message = "Name must not be empty!")
     private String name;
+    @NotEmpty(message = "Price must not be empty!")
     private String price;
+    @NotEmpty(message = "Quantity must not be empty!")
     private String quantity;
+    @NotEmpty(message = "Type must not be empty!")
     private String type;
     private String jmsType;
 
-    public Product(String name, String price, String quantity, String type, String jmsType) {
-        this.id = UUID.randomUUID();
+    public Product(String name, String price, String quantity, String type, String jmsType, String id) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -43,11 +45,11 @@ public class Product implements Serializable {
         this.jmsType = jmsType;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String  id) {
         this.id = id;
     }
 

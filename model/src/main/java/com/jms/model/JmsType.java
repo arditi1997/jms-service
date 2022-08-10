@@ -1,4 +1,4 @@
-package com.jms.service.model;
+package com.jms.model;
 
 public enum JmsType {
     QUEUE("QUEUE"),TOPIC("TOPIC");

@@ -1,6 +1,6 @@
 package com.jms.service.service;
 
-import com.jms.service.model.Product;
+import com.jms.model.Product;
 
 import javax.jms.JMSException;
 

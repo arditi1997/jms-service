@@ -44,7 +44,7 @@ public class JmsConfig {
         CachingConnectionFactory cacheConnectionFactory = new CachingConnectionFactory();
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
         connectionFactory.setBrokerURL("tcp://localhost:61616");
-        connectionFactory.setTrustedPackages(Arrays.asList("com.jms.service"));
+        connectionFactory.setTrustAllPackages(true);
         cacheConnectionFactory.setTargetConnectionFactory(connectionFactory);
         return cacheConnectionFactory;
     }
